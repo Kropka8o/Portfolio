@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+    --primary: #fccee8;
+    --accentOne: #a2f4fd;
+    --accentTwo: #96f7e4;
+    --accentThree: #a3b3ff;
+    --accentFour: #c4b4ff;
+    --contrast: #212e42;
+}
+
+.wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
