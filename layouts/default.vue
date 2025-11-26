@@ -7,7 +7,7 @@
     </div>
     <div
         :style="{'background-color': '#FEECF6'}"
-        class=""
+        class="py-5"
     >
       <div class="wrapper flex justify-center items-center">
         <nuxt-page />
