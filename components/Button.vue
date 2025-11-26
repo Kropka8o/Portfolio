@@ -1,21 +1,21 @@
 <template>
-  <div :style="{'display': isLinkATag ? 'none' : 'block'}">
-    <NuxtLink
-        :href="linkURL"
-        :style="{backgroundColor: isLinkATag ? 'black' : 'white', 'color': colour, 'border': '3px solid', 'border-color': borderColour, 'border-radius': radius + 'px'}"
-        class="px-3 py-2">
-      {{ content }}
-    </NuxtLink>
-  </div>
+  <NuxtLink v-if="!isLinkATag"
+            :to="linkURL"
+            :style="baseStyle">
+    <template v-if="imgSrc">
+      <img :src="imgSrc" :alt="imgAlt ?? ''" :style="imgStyle" />
+    </template>
+    <template v-else>{{ props.content }}</template>
+  </NuxtLink>
 
-  <div :style="{'display': isLinkATag ? 'block' : 'none'}">
-    <a
-        :href="linkURL"
-        :style="{ backgroundColor: isLinkATag ? 'red' : 'pink', 'color': colour, 'border': '3px solid', 'border-color': borderColour, 'border-radius': radius + 'px'}"
-        class="px-3 py-2">
-      {{ content }}
-    </a>
-  </div>
+  <a v-else
+     :href="linkURL"
+     :style="baseStyle">
+    <template v-if="imgSrc">
+      <img :src="imgSrc" :alt="imgAlt ?? ''" :style="imgStyle" />
+    </template>
+    <template v-else>{{ props.content }}</template>
+  </a>
 
 </template>
 
@@ -44,7 +44,31 @@
       required: false,
       default: 8,
       },
+    imgSrc: String,
+    imgAlt: String,
+    imgSize: {
+      type: Number,
+      required: false,
+      default: 24,
+    },
   })
-</script>
-<script setup lang="ts">
+
+  const baseStyle = computed(() => ({
+    backgroundColor: props.bgColour ?? 'transparent',
+    color: props.colour,
+    border: props.imgSrc ? 'none' : '3px solid',
+    borderColor: props.borderColour,
+    borderRadius: `${props.radius}px`,
+    padding: props.imgSrc ? '0' : '0.75rem 0.5rem'
+  }))
+
+  const imgStyle = computed(() => ({
+    width: `${props.imgSize}px`,
+    height: `${props.imgSize}px`,
+    objectFit: 'contain',
+    display: 'block',
+    padding: '0',
+    margin: '0',
+
+  }))
 </script>
