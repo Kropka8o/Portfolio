@@ -2,13 +2,13 @@ name: Build Vue
 on: [push]
 jobs:
   build_vue:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     name: Build Vue
     steps:
     - uses: actions/checkout@v2
     - id: Build-Vue
       uses: ashkantaravati/NuxtToGithubPages@v1.0
       with:
-        username: 'kropka8o'
+        username: 'Kropka8o'
         reponame: 'Portfolio'
         token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
